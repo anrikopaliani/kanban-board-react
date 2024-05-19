@@ -26,6 +26,13 @@ interface Props {
 const Column = ({ title, headingColor, column, cards, setCards }: Props) => {
   const [active, setActive] = useState(false);
 
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    card: { title: string; id: string; column: string }
+  ) => {
+    e.dataTransfer.setData("cardId", card.id);
+  };
+
   const filteredCards = cards.filter((card) => card.column === column);
   return (
     <div className="w-56 shrink-0">
@@ -41,7 +48,7 @@ const Column = ({ title, headingColor, column, cards, setCards }: Props) => {
         }`}
       >
         {filteredCards.map((card) => (
-          <Card key={card.id} {...card} />
+          <Card key={card.id} {...card} handleDragStart={handleDragStart} />
         ))}
         <DropIndicator beforeId="-1" column={column} />
         <AddCard column={column} setCards={setCards} />
