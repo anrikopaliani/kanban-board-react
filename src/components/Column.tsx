@@ -43,14 +43,14 @@ const Column = ({ title, headingColor, column, cards, setCards }: Props) => {
     const indicators = getIndicators();
     clearHighlights(indicators);
     const el = getNearestIndicator(e, indicators);
-    el.element.style.opacity = "1";
+    (el.element as HTMLElement).style.opacity = "1";
   };
 
   const clearHighlights = (els?: Element[]) => {
     const indicators = els || getIndicators();
 
     indicators.forEach((i) => {
-      i.style.opacity = "0";
+      (i as HTMLElement).style.opacity = "0";
     });
   };
 
@@ -96,7 +96,7 @@ const Column = ({ title, headingColor, column, cards, setCards }: Props) => {
     const indicators = getIndicators();
     const { element } = getNearestIndicator(e, indicators);
 
-    const before = element.dataset.before || "-1";
+    const before = (element as HTMLElement).dataset.before || "-1";
 
     if (before !== cardId) {
       let copy = [...cards];
